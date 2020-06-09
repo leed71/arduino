@@ -1,7 +1,7 @@
 
 #include <FastLED.h>
 #define NUM_LEDS 44
-#define DATA_PIN 6
+#define DATA_PIN 5
 #define COLOR_ORDER GRB
 #define FRAMES_PER_SECOND  120
 #define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0]))
@@ -21,13 +21,13 @@ int brightness = 50;
 
 
 
-const int buttonPin = 2;
+const int buttonPin = 4;
 int buttonState = 0;
 
 
 // Rotary Encoder Inputs
-const int inputCLK = 5;
-const int inputDT = 3;
+const int inputCLK = 3;
+const int inputDT = 2;
 int scene;
 int colour;
 int count;
@@ -76,8 +76,9 @@ uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 void loop() {
   gPatterns[gCurrentPatternNumber]();
 
-  int sensorVal = digitalRead(2);
+  int sensorVal = digitalRead(buttonPin);
   if (digitalRead(buttonPin) == LOW) {
+    Serial.print("NEXT ");
     nextPattern();
     delay(500);
 
